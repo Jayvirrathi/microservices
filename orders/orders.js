@@ -16,9 +16,19 @@ const Order = mongoose.model("orders");
 
 const portBook = process.env.PORT_BOOK || 3000;
 const portCustomer = process.env.PORT_CUSTOMER || 4000;
+const url = process.env.MONGO_URL || "mongodb://localhost:27017/order";
+const bookUrl =
+  `${process.env.BOOK_URL_LOCAL}${portBook}/book/` ||
+  `${process.env.BOOK_URL}/book/` ||
+  `http://localhost:${portBook}/book/`;
+
+const customerUrl =
+  `${process.env.CUSTOMER_URL_LOCAL}${portCustomer}/customer/` ||
+  `${process.env.CUSTOMER_URL}/customer/` ||
+  `http://localhost:${portCustomer}/customer/`;
 
 mongoose
-  .connect("mongodb://localhost:27017/order", {
+  .connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -73,14 +83,14 @@ app.get("/order/:id", (req, res) => {
           bookTitle: "",
         };
         await axios
-          .get(`http://localhost:${portCustomer}/customer/` + order.customerId)
+          .get(customerUrl + order.customerId)
           .then((customer) => {
             orderObj.customerName = customer.data.name;
           })
           .catch(() => res.send("Invalid customer id"));
 
         await axios
-          .get(`http://localhost:${portBook}/book/` + order.bookId)
+          .get(bookUrl + order.bookId)
           .then((book) => {
             orderObj.bookTitle = book.data.title;
           })

@@ -12,9 +12,9 @@ app.use(express.json());
 
 require("./customer.model.js");
 const Customer = mongoose.model("customers");
-
+const url = process.env.MONGO_URL || "mongodb://localhost:27017/customer";
 mongoose
-  .connect("mongodb://localhost:27017/customer", {
+  .connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
