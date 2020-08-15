@@ -2,6 +2,12 @@
 
 Includes API Server utilities:
 
+- [concurrently](https://www.npmjs.com/package/concurrently)
+  - Promise based HTTP client for the browser and node.js
+- [axios](https://www.npmjs.com/package/axios)
+  - Run multiple commands concurrently
+- [mongoose](https://www.npmjs.com/package/mongoose)
+  - Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment
 - [morgan](https://www.npmjs.com/package/morgan)
   - HTTP request logger middleware for node.js
 - [helmet](https://www.npmjs.com/package/helmet)
@@ -20,10 +26,10 @@ Development utilities:
 npm install
 ```
 
-## Test
+## Start
 
 ```
-npm run test
+npm run start
 ```
 
 ## Development

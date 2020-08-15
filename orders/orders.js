@@ -14,6 +14,9 @@ app.use(express.json());
 require("./order.model.js");
 const Order = mongoose.model("orders");
 
+const portBook = process.env.PORT_BOOK || 3000;
+const portCustomer = process.env.PORT_CUSTOMER || 4000;
+
 mongoose
   .connect("mongodb://localhost:27017/order", {
     useNewUrlParser: true,
@@ -69,16 +72,15 @@ app.get("/order/:id", (req, res) => {
           customerName: "",
           bookTitle: "",
         };
-
         await axios
-          .get("http://localhost:4000/customer/" + order.customerId)
+          .get(`http://localhost:${portCustomer}/customer/` + order.customerId)
           .then((customer) => {
             orderObj.customerName = customer.data.name;
           })
           .catch(() => res.send("Invalid customer id"));
 
         await axios
-          .get("http://localhost:3000/book/" + order.bookId)
+          .get(`http://localhost:${portBook}/book/` + order.bookId)
           .then((book) => {
             orderObj.bookTitle = book.data.title;
           })
