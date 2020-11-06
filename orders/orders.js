@@ -14,18 +14,13 @@ app.use(express.json());
 require("./order.model.js");
 const Order = mongoose.model("orders");
 
-const portBook = process.env.PORT_BOOK || 3000;
-const portCustomer = process.env.PORT_CUSTOMER || 4000;
-const url = process.env.MONGO_URL || "mongodb://localhost:27017/order";
-const bookUrl =
-  `${process.env.BOOK_URL_LOCAL}${portBook}/book/` ||
-  `${process.env.BOOK_URL}/book/` ||
-  `http://localhost:${portBook}/book/`;
+const url = process.env.MONGO_URL || "mongodb://mongo:27017/order";
 
+const bookUrl = process.env.BOOK_URL || "http://book:3000/book/";
 const customerUrl =
-  `${process.env.CUSTOMER_URL_LOCAL}${portCustomer}/customer/` ||
-  `${process.env.CUSTOMER_URL}/customer/` ||
-  `http://localhost:${portCustomer}/customer/`;
+  process.env.CUSTOMER_URL || "http://customer:4000/customer/";
+
+console.log(url, bookUrl, customerUrl);
 
 mongoose
   .connect(url, {
@@ -38,6 +33,10 @@ mongoose
   .catch(() => {
     console.log("Connection failed");
   });
+
+app.get("/", (req, res) => {
+  res.send("This is order service");
+});
 
 app.post("/order", (req, res) => {
   const newOrder = {
