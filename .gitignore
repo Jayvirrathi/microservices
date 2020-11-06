@@ -1,2 +1,7 @@
+books/node_modules/
+customers/node_modules/
+orders/node_modules/
 node_modules
-package-lock.json
+books/package-lock.json
+customers/package-lock.json
+orders/package-lock.json

@@ -1,0 +1,26 @@
+version: "2"
+services:
+    book:
+        build: ./books
+        ports:
+            - "3000:3000"
+        depends_on:
+            - mongo
+    customer:
+        build: ./customers
+        ports:
+            - "4000:4000"
+        depends_on:
+            - mongo
+    order:
+        build: ./orders
+        ports:
+            - "5000:5000"
+        depends_on:
+            - mongo
+            - book
+            - customer
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
