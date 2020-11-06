@@ -12,7 +12,7 @@ app.use(express.json());
 
 require("./book.model.js");
 const Book = mongoose.model("books");
-const url = process.env.MONGO_URL || "mongodb://localhost:27017/books";
+const url = process.env.MONGO_URL || "mongodb://mongo:27017/books";
 
 mongoose
   .connect(url, {
@@ -27,7 +27,7 @@ mongoose
   });
 
 app.get("/", (req, res) => {
-  res.send("This is our main endpoint");
+  res.send("This is books service");
 });
 
 app.post("/book", (req, res) => {

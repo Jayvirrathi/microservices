@@ -37,3 +37,10 @@ npm run start
 ```
 npm run dev
 ```
+
+## Docker
+
+### comment all variables in envs for docker build
+```
+docker-compose up --build
+```
