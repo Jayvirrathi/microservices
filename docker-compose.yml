@@ -1,26 +1,32 @@
-version: "2"
+version: "3.8"
 services:
-    book:
-        build: ./books
-        ports:
-            - "3000:3000"
-        depends_on:
-            - mongo
-    customer:
-        build: ./customers
-        ports:
-            - "4000:4000"
-        depends_on:
-            - mongo
-    order:
-        build: ./orders
-        ports:
-            - "5000:5000"
-        depends_on:
-            - mongo
-            - book
-            - customer
-    mongo:
-        image: mongo
-        ports:
-            - "27017:27017"
+  book:
+    build: ./books
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+  customer:
+    build: ./customers
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+  order:
+    build: ./orders
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+      - book
+      - customer
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - data-db:/data/db
+
+volumes:
+    data-db:
+
